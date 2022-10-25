@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Filesystem on vimmart</title>
+    <link>https://hauptling12.github.io/vimmart/tags/filesystem/</link>
+    <description>Recent content in Filesystem on vimmart</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 25 Oct 2022 10:54:58 +1000</lastBuildDate><atom:link href="https://hauptling12.github.io/vimmart/tags/filesystem/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux Directory Structure and Important Files Paths Explained</title>
+      <link>https://hauptling12.github.io/vimmart/posts/linux-directory-structure-and-important-files-paths-explained/</link>
+      <pubDate>Tue, 25 Oct 2022 10:54:58 +1000</pubDate>
+      
+      <guid>https://hauptling12.github.io/vimmart/posts/linux-directory-structure-and-important-files-paths-explained/</guid>
+      <description>&lt;p&gt;You must have probably heard that &lt;a href=&#34;https://hauptling12.github.io/vimmart/posts/explanation-of-everything-is-a-file-and-types-of-files-in-linux&#34;&gt;Everything is a File in Linux&lt;/a&gt; in UNIX and UNIX derivatives such as Linux. If not a file, then it must be a running process.&lt;/p&gt;
+&lt;p&gt;There are three broad categories of files in Linux.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;General Files&lt;/strong&gt; – These are ordinary files made up of binary or ASCII data. These are regular files such as documents, images, audio and video files, etc.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Directory Files&lt;/strong&gt; – In Linux, directories are also categorized as files since they also serve as storage space for other files and folders.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Device Files&lt;/strong&gt; – These are special files that provide an interface to device drivers which enable the usability of hardware devices on the system such as mice, keyboards, USB devices, hard drives, etc. These are found in the &lt;strong&gt;/dev&lt;/strong&gt; directory.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;linux-directory-structure-diagram&#34;&gt;Linux Directory Structure Diagram&lt;/h1&gt;
+&lt;p&gt;A standard Linux distribution follows the directory structure as provided below with Diagram and explanation.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hauptling12.github.io/vimmart/filesystem-structure.webp&#34; alt=&#34;linux file system diagram&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Each of the above directories (which is a file, in the first place) contains important information, required for booting to device drivers, configuration files, etc. Describing briefly the purpose of each directory, we are starting hierarchically.&lt;/p&gt;
+&lt;h2 id=&#34;-directory&#34;&gt;/ Directory&lt;/h2&gt;
+&lt;p&gt;The root directory, denoted by a single forward slash &lt;code&gt;/&lt;/code&gt;, is the uppermost directory in the Linux directory structure. It contains all directories, sub-directories, and files on your Linux system. It’s from the root directory where the Linux directory hierarchy starts.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: The root directory &lt;code&gt;(/)&lt;/code&gt; should not be confused with the root home directory &lt;code&gt;(/root)&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;boot-directory&#34;&gt;/boot Directory&lt;/h2&gt;
+&lt;p&gt;This is one of the most vital directories in a Linux system. As the name infers, the boot directory contains Linux boot files such as the bootloader, the kernel, and its associated files. Files such as &lt;code&gt;vmlinuz&lt;/code&gt; represent the compressed image of the Linux kernel.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;/etc&lt;/code&gt; directory contains system configuration files for all the services, scripts, and third-party applications that are installed. This directory is considered the nerve center of the Linux system.&lt;/p&gt;
+&lt;h2 id=&#34;etc-directory&#34;&gt;/etc Directory&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;ls5.webp&#34; alt=&#34;ls of etc&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;home-directory&#34;&gt;/home Directory&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;/home&lt;/code&gt; directory is a directory that contains a user’s personal folders and files. On a graphical Linux system, the home directory, by default, contains folders such as Desktop, Documents, Downloads, Pictures, Videos, and Public.&lt;/p&gt;
+&lt;p&gt;In addition, the &lt;code&gt;/home&lt;/code&gt; directory contains personal configuration files which are prefixed with a dot &lt;code&gt;(.)&lt;/code&gt;. These are hidden files that contain user-specific settings for the login shell session.&lt;/p&gt;
+&lt;h2 id=&#34;root-directory&#34;&gt;/root Directory&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;/root&lt;/code&gt; directory is the home directory for the root user, which is also referred to as the root user’s home directory (and not as the root &lt;code&gt;(/)&lt;/code&gt; directory).&lt;/p&gt;
+&lt;p&gt;The root account also referred to as the superuser, administrative user, system administrator or just the root user has all the access to commands and system files in Linux.&lt;/p&gt;
+&lt;h2 id=&#34;opt-directory&#34;&gt;/opt Directory&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;/opt&lt;/code&gt; directory is a directory that is reserved for add-on packages and third-party software applications that are not included by default in the system’s official repositories.&lt;/p&gt;
+&lt;p&gt;For example, when you install applications such as &lt;code&gt;Skype&lt;/code&gt;, &lt;code&gt;Discord&lt;/code&gt;, &lt;code&gt;Spotify&lt;/code&gt;, and &lt;code&gt;Java&lt;/code&gt;, to mention a few, they get stored in the /opt directory.&lt;/p&gt;
+&lt;h2 id=&#34;dev-directory&#34;&gt;/dev Directory&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;/dev&lt;/code&gt; directory contains device files or special files for devices that are attached to the system such as the hard drive, keyboard, and mouse. As mentioned, these are not regular that a user can read and write to.&lt;/p&gt;
+&lt;p&gt;These are abstractions of standard devices that applications on your system interact with through input and output system calls.&lt;/p&gt;
+&lt;h2 id=&#34;var-directory&#34;&gt;/var Directory&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;/var&lt;/code&gt; directory stores system-generated variable files, which include log files, caches, and spool files just to mention a few.&lt;/p&gt;
+&lt;h2 id=&#34;bin-directory&#34;&gt;/bin Directory&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;/bin&lt;/code&gt; directory contains user binaries, executable programs, and common system commands that are used by all users in the system. These include &lt;a href=&#34;https://hauptling12.github.io/vimmart/posts/15-basic-ls-command-examples-in-linux&#34;&gt;ls&lt;/a&gt;, &lt;a href=&#34;https://hauptling12.github.io/vimmart/posts/pwd-command-examples&#34;&gt;pwd&lt;/a&gt;, &lt;a href=&#34;https://hauptling12.github.io/vimmart/posts/13-basic-cat-command-examples-in-linux&#34;&gt;cat&lt;/a&gt;, &lt;code&gt;mkdir&lt;/code&gt;, &lt;a href=&#34;https://hauptling12.github.io/vimmart/posts/cd-command-in-linux&#34;&gt;cd&lt;/a&gt;, &lt;code&gt;cp&lt;/code&gt;, &lt;code&gt;du&lt;/code&gt;, &lt;a href=&#34;https://hauptling12.github.io/vimmart/posts/how-to-check-disk-space-in-linux&#34;&gt;df&lt;/a&gt;, &lt;a href=&#34;https://hauptling12.github.io/vimmart/posts/18-tar-command-examples-in-linux&#34;&gt;tar&lt;/a&gt;, &lt;code&gt;rpm&lt;/code&gt;, &lt;code&gt;wc&lt;/code&gt;, etc.&lt;/p&gt;
+&lt;h2 id=&#34;sbin-directory&#34;&gt;/sbin Directory&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;/sbin&lt;/code&gt; directory contains executable files, utilities, and system commands that are reserved for the root user or a user with root privileges. Such commands include halt, reboot, mkfs, &lt;a href=&#34;https://hauptling12.github.io/vimmart/posts/how-to-fix-busybox-initramfs-error-on-ubuntu&#34;&gt;fsck&lt;/a&gt;, &lt;a href=&#34;https://hauptling12.github.io/vimmart/posts/fdisk-commands-to-manage-linux-disk-partitions&#34;&gt;fdisk&lt;/a&gt;, &lt;code&gt;halt&lt;/code&gt;, &lt;code&gt;iptables&lt;/code&gt;, &lt;a href=&#34;https://hauptling12.github.io/vimmart/posts/ifconfig-command-examples&#34;&gt;ifconfig&lt;/a&gt;, &lt;code&gt;ip&lt;/code&gt;, &lt;code&gt;swapon&lt;/code&gt;, etc.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hauptling12.github.io/vimmart/linux-fhs-binary-directories2.webp&#34; alt=&#34;ls of sbin&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;usr-directory&#34;&gt;/usr Directory&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;/usr&lt;/code&gt; directory ranks as one of the most important directories due to the enormous amount of data it holds. The directory contains system-wide read-only files. These include libraries, user binaries and their documentation, programs, and system utilities.&lt;/p&gt;
+&lt;h2 id=&#34;proc-directory&#34;&gt;/proc Directory&lt;/h2&gt;
+&lt;p&gt;The &lt;a href=&#34;https://hauptling12.github.io/vimmart/posts/exploring-proc-file-system-in-linux&#34;&gt;/proc directory&lt;/a&gt; is somewhat of a strange directory. It is a virtual or pseudo filesystem that contains vital information about running processes. It is considered the control and information center for the Linux kernel.&lt;/p&gt;
+&lt;p&gt;The filesystem is created on the fly upon system startup and is destroyed once the system is powered off.&lt;/p&gt;
+&lt;h2 id=&#34;mnt-directory&#34;&gt;/mnt Directory&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;/mnt&lt;/code&gt; directory along with its subdirectories is a directory intended to be used as a temporary mount point for &lt;a href=&#34;https://hauptling12.github.io/vimmart/posts/how-to-mount-and-unmount-an-iso-image-in-linux&#34;&gt;mounting storage devices&lt;/a&gt; such as Hard disk drives, USB drives, and CDROMs.&lt;/p&gt;
+&lt;h2 id=&#34;sys-directory&#34;&gt;/sys Directory&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;/sys&lt;/code&gt; is a virtual file system that contains a set of virtual files that provide an interface to the Linux kernel.&lt;/p&gt;
+&lt;h2 id=&#34;media-directory&#34;&gt;/media Directory&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;/media&lt;/code&gt; directory is a directory where the system mounts removable media such as USB drives.&lt;/p&gt;
+&lt;h2 id=&#34;run-directory&#34;&gt;/run Directory&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;/run&lt;/code&gt; directory is a temporary filesystem that contains volatile runtime data that shows the system has since it was booted. Files under the /run directory must be deleted (removed or truncated as convenient) at the start of the boot process.&lt;/p&gt;
+&lt;h2 id=&#34;tmp-directory&#34;&gt;/tmp Directory&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;/tmp&lt;/code&gt; directory is a directory that stores temporary files and many programs use this directory to create lock files and keep the temporary storage of data.&lt;/p&gt;
+&lt;p&gt;Do not delete files under the/tmp directory unless you know exactly what you are doing! Many of these files are critical for presently running programs and removing them may affect a system crash.&lt;/p&gt;
+&lt;h2 id=&#34;lib-directory&#34;&gt;/lib Directory&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;/lib&lt;/code&gt; directory stores all the essential standard libraries required by user binaries in the &lt;code&gt;/bin&lt;/code&gt; directory.&lt;/p&gt;
+&lt;h2 id=&#34;lostfound-directory&#34;&gt;/lost+found Directory&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;lost+found&lt;/code&gt; directory is installed during the installation of Linux, useful for recovering files that may be broken due to unexpected shut-down.&lt;/p&gt;
+&lt;h2 id=&#34;srv-directory&#34;&gt;/srv Directory&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;/srv&lt;/code&gt; directory is the service directory and is abbreviated as ‘srv‘. This directory contains server-specific and service-related files.&lt;/p&gt;
+&lt;h1 id=&#34;exploring-important-file-their-location-and-their-usability&#34;&gt;Exploring Important file, their location, and their Usability&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Linux&lt;/strong&gt; is a complex system that requires a more complex and efficient way to &lt;strong&gt;start&lt;/strong&gt;, &lt;strong&gt;stop&lt;/strong&gt;, &lt;strong&gt;maintain&lt;/strong&gt; and &lt;strong&gt;reboot&lt;/strong&gt; a system, unlike &lt;strong&gt;Windows&lt;/strong&gt;. There is a well-defined configuration &lt;strong&gt;file&lt;/strong&gt;, &lt;strong&gt;binaries&lt;/strong&gt;, &lt;strong&gt;man pages&lt;/strong&gt;, &lt;strong&gt;info files&lt;/strong&gt;, etc. for every &lt;strong&gt;process&lt;/strong&gt; in &lt;strong&gt;Linux&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;In addition to the major directories, here is a list of some of the prominent files and directories and their uses.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;/boot/vmlinuz&lt;/strong&gt; : The &lt;strong&gt;Linux Kernel&lt;/strong&gt; file.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/dev/hda &lt;/strong&gt;: Device file for the first &lt;strong&gt;IDE HDD&lt;/strong&gt; (&lt;strong&gt;Hard Disk Drive&lt;/strong&gt;).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/dev/hdc&lt;/strong&gt; : Device file for the &lt;strong&gt;IDE Cdrom&lt;/strong&gt;, commonly.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/dev/sda&lt;/strong&gt;: Device file for the first SATA Drive (Hard Disk Drive).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/dev/null&lt;/strong&gt; : A pseudo-device, that doesn’t exist. Sometimes garbage output is redirected to &lt;strong&gt;/dev/null&lt;/strong&gt;, so that it gets lost, forever.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/etc/bashrc&lt;/strong&gt; : This file contains system-wide defaults, functions, and aliases among other files that are used by all the system users.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/etc/crontab&lt;/strong&gt; : This is a system-wide file that is uniquely formatted to schedule or automate system tasks on a Linux system.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/etc/exports&lt;/strong&gt; : A file that determines which file systems are exported to remote hosts and specifies options.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/etc/fstab&lt;/strong&gt; : This is a special file that contains information about all avaiable mount points and mount point options. Each line in this file provides six options, each of which denotes information about a mount point or filesystem.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/etc/hosts&lt;/strong&gt; : This is a configuration file that maps system hostnames to their corresponding IP addresses.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/etc/hosts.allow&lt;/strong&gt; : The file specifies which hosts are permitted to connect to the local system.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/etc/host.deny&lt;/strong&gt; : The file specifies which hosts are denied access and services on the local machine.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/etc/issue&lt;/strong&gt; : Contains a pre-login message.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/etc/modules&lt;/strong&gt; : This file contains the names of kernel modules that should be loaded at boot time, one per line.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/etc/motd&lt;/strong&gt; : motd stands for a &lt;strong&gt;message of the day&lt;/strong&gt;, the message users get upon login.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/etc/mtab&lt;/strong&gt; : A read-only file that contains a list of currently mounted filesystems.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/etc/passwd&lt;/strong&gt; : A file that contains the system user’s information such as the username, UID, GID, and login shell among others&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/etc/printcap&lt;/strong&gt; : Contains printer information that is generated by the /etc/cups/printers.conf file.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/etc/profile&lt;/strong&gt; : Contains Linux system-wide environment and other startup scripts.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/etc/profile.d&lt;/strong&gt; : Application script, executed after &lt;strong&gt;login&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/etc/rc.d&lt;/strong&gt; : Information about &lt;strong&gt;run level&lt;/strong&gt; specific script.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/etc/rc.d/init.d&lt;/strong&gt; : Run Level &lt;strong&gt;Initialisation&lt;/strong&gt; Script.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/etc/resolv.conf&lt;/strong&gt; : This is a DNS resolver file. It specifies how the system leverages DNS to resolve hostnames.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/etc/security&lt;/strong&gt; : Contains configuration files for various PAM modules.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/etc/skel&lt;/strong&gt; : This is a directory that contains a set of user configuration files that are copied to the user’s home directory when a user is created.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/etc/X11&lt;/strong&gt; : This is a directory that contains configuration files for the X-window System.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/usr/bin&lt;/strong&gt; : Normal user &lt;strong&gt;executable&lt;/strong&gt; commands.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/usr/bin/X11&lt;/strong&gt; : This directory contains infinitely nested directories and binaries for the X Windows System.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/usr/include&lt;/strong&gt; : The directory contains header files for C compilers. This includes stdio.h, stdlib.h, and string.h among others.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/usr/share&lt;/strong&gt; : Shared directories of &lt;strong&gt;man files&lt;/strong&gt;, &lt;strong&gt;info files&lt;/strong&gt;, etc.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/usr/lib&lt;/strong&gt; : This directory consists of object files and directories&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/usr/sbin&lt;/strong&gt; : The directory contains binaries with superuser privileges or for System Administration.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/proc/cpuinfo&lt;/strong&gt; : The file contains system info including CPU model, model name, number of cores, and clock speed to mention a few files.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/proc/interrupts&lt;/strong&gt; : Information about the current &lt;strong&gt;interrupts&lt;/strong&gt; being utilized currently.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/proc/ioports&lt;/strong&gt; : The file contains all the Input/Output addresses used by devices on the server.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/proc/meminfo&lt;/strong&gt; : A file that stores memory usage information including swap information.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/proc/modules&lt;/strong&gt; : A file that lists all the modules being used by the kernel&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/proc/mount&lt;/strong&gt; : The file contains detailed mounted file-system information.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/proc/stat&lt;/strong&gt; : The file contains detailed information about the system and kernel activity.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/proc/swaps&lt;/strong&gt; : The file contains information about the swap file.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/proc/version &lt;/strong&gt;: The file contains Linux version information.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/var/log/lastlog&lt;/strong&gt; : A binary file that contains information about the last successful user logins.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/var/log/messages&lt;/strong&gt; : The file contains a log of messages produced by the &lt;strong&gt;syslog&lt;/strong&gt; daemon at boot.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/var/log/syslog&lt;/strong&gt; : A file that contains non-critical system logs.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/var/log/wtmp&lt;/strong&gt; : A file listing the login &lt;strong&gt;time&lt;/strong&gt; and &lt;strong&gt;duration&lt;/strong&gt; of each user on the system currently.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

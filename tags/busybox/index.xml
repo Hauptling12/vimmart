@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>busybox on vimmart</title>
+    <link>https://hauptling12.github.io/vimmart/tags/busybox/</link>
+    <description>Recent content in busybox on vimmart</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 25 Oct 2022 15:21:12 +1000</lastBuildDate><atom:link href="https://hauptling12.github.io/vimmart/tags/busybox/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How to Fix Busybox Initramfs Error on linux</title>
+      <link>https://hauptling12.github.io/vimmart/posts/how-to-fix-busybox-initramfs-error-on-ubuntu/</link>
+      <pubDate>Tue, 25 Oct 2022 15:21:12 +1000</pubDate>
+      
+      <guid>https://hauptling12.github.io/vimmart/posts/how-to-fix-busybox-initramfs-error-on-ubuntu/</guid>
+      <description>&lt;p&gt;This brief guide explains how to &lt;strong&gt;fix Busybox Initramfs error on Linux&lt;/strong&gt;. I am using Ubuntu 20.04 LTS as my daily driver on my Dell Inspiron laptop. Today I turned it on and the boot process dropped to the BusyBox shell and I ended up at the &lt;code&gt;initramfs&lt;/code&gt; prompt. &lt;/p&gt;
+&lt;p&gt;As far as I can remember, I did nothing wrong. I didn&amp;rsquo;t forcibly power off it. It was working just fine yesterday! When I switched it on today, I landed in the BusyBox shell:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;BusyBox v1.30.1 (Ubuntu 1:1.30.1-4ubuntu6.1) built-in shell (ash) 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Enter &amp;#39;help&amp;#39; for a list of built-in commands.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;(initramfs)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I can&amp;rsquo;t get past this screen. Also it doesn&amp;rsquo;t show what exactly the problem is. All I see is just a blank busybox shell.&lt;/p&gt;
+&lt;p&gt;I wasn&amp;rsquo;t sure what to do at this point. So I simply passed the exit command to see what happens.&lt;/p&gt;
+&lt;p&gt;And then I saw the actual error:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;(initramfs) exit
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda1 contains a file system with errors, check forced.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Inode 4326476 extent tree (at level 1) could be narrower, IGNORED.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda1: Inode 4326843 extent tree (at level 1) could be narrower, IGNORED.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda1: Inode 4327012 extent tree (at level 1) could be narrower, IGNORED.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda1: Inode 4329004 extent tree (at level 1) could be narrower, IGNORED.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda1: Inodes that were part of a corrupted orphan linked list found.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda1: UNEXPECTED INCONSISTENCY; RUN fsck MANUALLY.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        (i.e., without -a or -p options) 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;fsck exited with status code 4. 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;The root filesystem on /dev/sda1 requires a manual fsck. 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;BusyBox v1.30.1 (Ubuntu 1:1.30.1-4ubuntu6.1) built-in shell (ash)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Enter &amp;#39;help&amp;#39; for a list of built-in commands.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;(initramfs)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://hauptling12.github.io/vimmart/02-bootloader/Busybox-Initramfs-Error-On-Ubuntu.jpg&#34; alt=&#34;errors&#34;&gt;&lt;/p&gt;
+&lt;p&gt;As you can see in the above output, the /dev/sda1 partition is corrupted. The file system in this partition has some errors. If you ever encountered with this type of problem, you need to check and repair the problematic Linux filesystems with fsck command.&lt;/p&gt;
+&lt;p&gt;Please note that sometimes you don&amp;rsquo;t see any errors after typing the exit command. In that case, try to run fsck on all filesystems.&lt;/p&gt;
+&lt;p&gt;For those wondering, BusyBox is software suite that provides many common UNIX utilities into a single small executable. It provides replacements for most of the utilities you usually find in GNU fileutils, shellutils, etc.&lt;/p&gt;
+&lt;p&gt;Initramfs is an initial ram file system based on tmpfs. It contains the tools and scripts required to mount the file systems before the init binary on the real root file system is called.&lt;/p&gt;
+&lt;h2 id=&#34;fix-busybox-initramfs-error-on-ubuntu-linux&#34;&gt;Fix Busybox Initramfs Error On Ubuntu Linux&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;To solve initramfs error on Ubuntu Linux, you need to repair the filesystem in the corrupted partition using fsck command like below:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;(initramfs) fsck /dev/sda1 -y
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Replace /dev/sda1 with your partition name. In your system, it could be /dev/sdb1, /dev/sdc1 etc. You can use cat /proc/partitions or blkid commands to get your Linux partition details in Busybox.&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Now the fsck command will start to fix all bad blocks automatically in the filesystem.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;After a couple minutes, you will see an output like below:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda1: ***** FILE SYSTEM WAS MODIFIED *****
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda1: 497733/30531584 files (1.5% non-contiguous), ........
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;Next, type reboot and hit ENTER to restart your system!&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;(initramfs) reboot
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;Fix-Busybox-Initramfs-Error-On-Ubuntu.jpg&#34; alt=&#34;errors&#34;&gt;&lt;/p&gt;
+&lt;p&gt;If the reboot command doesn&amp;rsquo;t work, type exit and hit ENTER.&lt;/p&gt;
+&lt;p&gt;Cross your fingers and wait for the system to reboot! If all went well, your system will boot normally without any problem.&lt;/p&gt;
+&lt;p&gt;These steps helped me and many others (see the comment section below) to solve Busybox Initramfs error on Ubuntu Linux operating system. If you are stuck in initramfs prompt, this guide will definitely help.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Heads Up&lt;/strong&gt;: If you keep getting this error often, probably your hard disk is getting weaker. In that case, it is recommended to backup the data and replace the hard disk as soon as possible.&lt;/p&gt;
+&lt;p&gt;If your Ubuntu system is crashed due to power failure or network connectivity issue in the middle of the upgrade process, you might end up with broken Ubuntu. In that case, you can easily fix broken Ubuntu without reinstalling it as described in the following guide.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

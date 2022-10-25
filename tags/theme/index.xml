@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>theme on vimmart</title>
+    <link>https://hauptling12.github.io/vimmart/tags/theme/</link>
+    <description>Recent content in theme on vimmart</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 25 Oct 2022 13:07:44 +1000</lastBuildDate><atom:link href="https://hauptling12.github.io/vimmart/tags/theme/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Grub Bootloader Themes</title>
+      <link>https://hauptling12.github.io/vimmart/posts/grub-bootloader-themes/</link>
+      <pubDate>Tue, 25 Oct 2022 13:07:44 +1000</pubDate>
+      
+      <guid>https://hauptling12.github.io/vimmart/posts/grub-bootloader-themes/</guid>
+      <description>&lt;p&gt;Do you dual boot often? Well make the Bootloader Selection Screen Awesome! Here are my top 5 GRUB Bootloader themes.&lt;/p&gt;
+&lt;h2 id=&#34;all-in-one-pack&#34;&gt;All-In-One Pack&lt;/h2&gt;
+&lt;p&gt;This Pack is everything below so you can swap between them&lt;/p&gt;
+&lt;h3 id=&#34;installation&#34;&gt;Installation&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git clone https://github.com/ChrisTitusTech/Top-5-Bootloader-Themes
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cd Top-5-Bootloader-Themes
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo ./install.sh
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;cyberre&#34;&gt;CyberRE&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://hauptling12.github.io/vimmart/02-bootloader/cyberre.jpg&#34; alt=&#34;CyberRE&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Source: &lt;a href=&#34;https://www.gnome-look.org/p/1420727/&#34;&gt;https://www.gnome-look.org/p/1420727/&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;cyberpunk&#34;&gt;CyberPunk&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://hauptling12.github.io/vimmart/02-bootloader/cyberpunk.jpg&#34; alt=&#34;Cyberpunk&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Source: &lt;a href=&#34;https://www.gnome-look.org/p/1429443/&#34;&gt;https://www.gnome-look.org/p/1429443/&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;fallout&#34;&gt;Fallout&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://hauptling12.github.io/vimmart/02-bootloader/fallout.jpg&#34; alt=&#34;Fallout&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Source: &lt;a href=&#34;https://www.gnome-look.org/p/1230882/&#34;&gt;https://www.gnome-look.org/p/1230882/&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;vimix&#34;&gt;Vimix&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://hauptling12.github.io/vimmart/02-bootloader/vimix.jpg&#34; alt=&#34;Vimix&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Source: &lt;a href=&#34;https://www.gnome-look.org/p/1009236/&#34;&gt;https://www.gnome-look.org/p/1009236/&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;shodan&#34;&gt;Shodan&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://hauptling12.github.io/vimmart/02-bootloader/shodan.jpg&#34; alt=&#34;Shodan&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Source: &lt;a href=&#34;https://www.gnome-look.org/p/1251112/&#34;&gt;https://www.gnome-look.org/p/1251112/&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Windows on vimmart</title>
+    <link>https://hauptling12.github.io/vimmart/categories/windows/</link>
+    <description>Recent content in Windows on vimmart</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 25 Oct 2022 11:38:12 +1000</lastBuildDate><atom:link href="https://hauptling12.github.io/vimmart/categories/windows/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Fdisk Commands to Manage Linux Disk Partitions</title>
+      <link>https://hauptling12.github.io/vimmart/posts/fdisk-commands-to-manage-linux-disk-partitions/</link>
+      <pubDate>Tue, 25 Oct 2022 11:38:12 +1000</pubDate>
+      
+      <guid>https://hauptling12.github.io/vimmart/posts/fdisk-commands-to-manage-linux-disk-partitions/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;fdisk&lt;/strong&gt; stands (for “&lt;strong&gt;fixed disk&lt;/strong&gt; or &lt;strong&gt;format disk&lt;/strong&gt;“) is an most commonly used command-line based disk manipulation utility for a &lt;strong&gt;Linux/Unix&lt;/strong&gt; systems. With the help of fdisk command you can view, create, resize, delete, change, copy and move partitions on a hard drive using its own user friendly text based menu driven interface.&lt;/p&gt;
+&lt;p&gt;This tool is very useful in terms of creating space for new partitions, organising space for new drives, re-organising an old drives and copying or moving data to new disks. It allows you to create a maximum of four new &lt;strong&gt;primary&lt;/strong&gt; partition and number of logical (&lt;strong&gt;extended&lt;/strong&gt;) partitions, based on size of the hard disk you have in your system.&lt;/p&gt;
+&lt;p&gt;This article explains 10 basic &lt;code&gt;fdisk&lt;/code&gt; commands to manage a partition table in Linux based systems. You must be root user to run fdisk command, otherwise you will get a “&lt;code&gt;command not found&lt;/code&gt;” error.&lt;/p&gt;
+&lt;h2 id=&#34;1-view-all-disk-partitions-in-linux&#34;&gt;1 View all Disk Partitions in Linux&lt;/h2&gt;
+&lt;p&gt;The following basic command list all existing disk partition on your system. The ‘&lt;strong&gt;-l&lt;/strong&gt;‘ argument stand for (listing all partitions) is used with fdisk command to view all available partitions on Linux. The partitions are displayed by their device’s names. For example: &lt;strong&gt;/dev/sda&lt;/strong&gt;, &lt;strong&gt;/dev/sdb&lt;/strong&gt; or &lt;strong&gt;/dev/sdc&lt;/strong&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[root@vimmart.com ~]# fdisk -l
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Disk /dev/sda: 637.8 GB, 637802643456 bytes
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;255 heads, 63 sectors/track, 77541 cylinders
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Units = cylinders of 16065 * 512 = 8225280 bytes
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   Device Boot      Start         End      Blocks   Id  System
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda1   *           1          13      104391   83  Linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda2              14        2624    20972857+  83  Linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda3            2625        4582    15727635   83  Linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda4            4583       77541   586043167+   5  Extended
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda7            7193        7845     5245191   83  Linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda8            7846        8367     4192933+  82  Linux swap / Solaris
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda9            8368       77541   555640123+  8e  Linux LVM
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;2-view-specific-disk-partition-in-linux&#34;&gt;2. View Specific Disk Partition in Linux&lt;/h2&gt;
+&lt;p&gt;To view all partitions of specific hard disk use the option ‘&lt;strong&gt;-l&lt;/strong&gt;‘ with device name. For example, the following command will display all disk partitions of device &lt;strong&gt;/dev/sda&lt;/strong&gt;. If you’ve different device names, simple write device name as &lt;strong&gt;/dev/sdb&lt;/strong&gt; or &lt;strong&gt;/dev/sdc&lt;/strong&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[root@vimmart.com ~]# fdisk -l /dev/sda
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Disk /dev/sda: 637.8 GB, 637802643456 bytes
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;255 heads, 63 sectors/track, 77541 cylinders
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Units = cylinders of 16065 * 512 = 8225280 bytes
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   Device Boot      Start         End      Blocks   Id  System
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda1   *           1          13      104391   83  Linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda2              14        2624    20972857+  83  Linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda3            2625        4582    15727635   83  Linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda4            4583       77541   586043167+   5  Extended
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda7            7193        7845     5245191   83  Linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda8            7846        8367     4192933+  82  Linux swap / Solaris
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda9            8368       77541   555640123+  8e  Linux LVM
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;3-check-all-available-fdisk-commands&#34;&gt;3. Check all Available fdisk Commands&lt;/h3&gt;
+&lt;p&gt;If you would like to view all commands which are available for &lt;code&gt;fdisk&lt;/code&gt;. Simply use the following command by mentioning the hard disk name such as &lt;code&gt;/dev/sda&lt;/code&gt; as shown below. The following command will give you output similar to below.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[root@tvimmart ~]# fdisk /dev/sda
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;WARNING: DOS-compatible mode is deprecated. It&amp;#39;s strongly recommended to
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;         switch off the mode (command &amp;#39;c&amp;#39;) and change display units to
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;         sectors (command &amp;#39;u&amp;#39;).
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Command (m for help):
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Type ‘&lt;code&gt;m&lt;/code&gt;‘ to see the list of all available commands of fdisk which can be operated on &lt;code&gt;/dev/sda&lt;/code&gt; hard disk. After, I enter ‘m‘ on the screen, you will see the all available options for fdisk that you can be used on the &lt;code&gt;/dev/sda&lt;/code&gt; device.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[root@vimmart ~]# fdisk /dev/sda
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;WARNING: DOS-compatible mode is deprecated. It&amp;#39;s strongly recommended to
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;         switch off the mode (command &amp;#39;c&amp;#39;) and change display units to
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;         sectors (command &amp;#39;u&amp;#39;).
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Command (m for help): m
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Command action
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   a   toggle a bootable flag
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   b   edit bsd disklabel
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   c   toggle the dos compatibility flag
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   d   delete a partition
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   l   list known partition types
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   m   print this menu
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   n   add a new partition
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   o   create a new empty DOS partition table
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   p   print the partition table
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   q   quit without saving changes
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   s   create a new empty Sun disklabel
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   t   change a partition&amp;#39;s system id
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   u   change display/entry units
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   v   verify the partition table
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   w   write table to disk and exit
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   x   extra functionality (experts only)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Command (m for help):
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;4-print-all-partition-table-in-linux&#34;&gt;4. Print all Partition Table in Linux&lt;/h2&gt;
+&lt;p&gt;To print all partition table of hard disk, you must be on command mode of specific hard disk say &lt;code&gt;/dev/sda&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Command (m for help): p
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Disk /dev/sda: 637.8 GB, 637802643456 bytes
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;255 heads, 63 sectors/track, 77541 cylinders
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Units = cylinders of 16065 * 512 = 8225280 bytes
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   Device Boot      Start         End      Blocks   Id  System
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda1   *           1          13      104391   83  Linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda2              14        2624    20972857+  83  Linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda3            2625        4582    15727635   83  Linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda4            4583       77541   586043167+   5  Extended
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda5            4583        5887    10482381   83  Linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda6            5888        7192    10482381   83  Linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda7            7193        7845     5245191   83  Linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda8            7846        8367     4192933+  82  Linux swap / Solaris
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda9            8368       77541   555640123+  8e  Linux LVM
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Command (m for help):
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;5-how-to-delete-a-partition-in-linux&#34;&gt;5. How to Delete a Partition in Linux&lt;/h2&gt;
+&lt;p&gt;If you would like to delete a specific partition (i.e &lt;code&gt;/dev/sda9&lt;/code&gt;) from the specific hard disk such as /dev/sda. You must be in fdisk command mode to do this.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[root@vimmart ~]# fdisk /dev/sda
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Next, enter ‘&lt;strong&gt;d&lt;/strong&gt;‘ to delete any given partition name from the system. As I enter ‘&lt;strong&gt;d&lt;/strong&gt;‘, it will prompt me to enter partition number that I want to delete from &lt;strong&gt;/dev/sda&lt;/strong&gt; hard disk. Suppose I enter number ‘&lt;strong&gt;4&lt;/strong&gt;‘ here, then it will delete partition number ‘&lt;strong&gt;4&lt;/strong&gt;‘ (i.e. &lt;strong&gt;/dev/sda4&lt;/strong&gt;) disk and shows free space in partition table. Enter ‘&lt;strong&gt;w&lt;/strong&gt;‘ to write table to disk and exit after making new alterations to partition table. The new changes would only take place after next reboot of system. This can be easily understood from the below output.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[root@vimmart ~]# fdisk /dev/sda
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;WARNING: DOS-compatible mode is deprecated. It&amp;#39;s strongly recommended to
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;         switch off the mode (command &amp;#39;c&amp;#39;) and change display units to
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;         sectors (command &amp;#39;u&amp;#39;).
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Command (m for help): d
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Partition number (1-4): 4
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Command (m for help): w
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;The partition table has been altered!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Calling ioctl() to re-read partition table.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;WARNING: Re-reading the partition table failed with error 16: Device or resource busy.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;The kernel still uses the old table. The new table will be used at
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;the next reboot or after you run partprobe(8) or kpartx(8)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Syncing disks.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;You have new mail in /var/spool/mail/root
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Warning&lt;/strong&gt; : Be careful, while performing this step, because using option ‘&lt;strong&gt;d&lt;/strong&gt;‘ will completely delete partition from system and may lost all data in partition.&lt;/p&gt;
+&lt;h2 id=&#34;6-how-to-create-a-new-partition-in-linux&#34;&gt;6. How to Create a New Partition in Linux&lt;/h2&gt;
+&lt;p&gt;If you’ve free space left on one of your device say &lt;strong&gt;/dev/sda&lt;/strong&gt; and would like to create a new partition under it. Then you must be in fdisk command mode of &lt;strong&gt;/dev/sda&lt;/strong&gt;. Type the following command to enter into command mode of specific hard disk.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[root@vimmart ~]# fdisk /dev/sda
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;After entering in command mode, now press “&lt;strong&gt;n&lt;/strong&gt;” command to create a new partition under &lt;strong&gt;/dev/sda&lt;/strong&gt; with specific size. This can be demonstrated with the help of following given output.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[root@vimmart ~]# fdisk  /dev/sda
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;WARNING: DOS-compatible mode is deprecated. It&amp;#39;s strongly recommended to
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;         switch off the mode (command &amp;#39;c&amp;#39;) and change display units to
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;         sectors (command &amp;#39;u&amp;#39;).
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Command (m for help): n
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Command action
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   e   extended
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   p   primary partition (1-4)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;e
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;While creating a new partition, it will ask you two options ‘&lt;strong&gt;extended&lt;/strong&gt;‘ or ‘&lt;strong&gt;primary&lt;/strong&gt;‘ partition creation. Press ‘&lt;strong&gt;e&lt;/strong&gt;‘ for extended partition and ‘&lt;strong&gt;p&lt;/strong&gt;‘ for primary partition. Then it will ask you to enter following two inputs.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;First cylinder number of the partition to be create.&lt;/li&gt;
+&lt;li&gt;Last cylinder number of the partition to be created (Last cylinder, +cylinders or +size).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;You can enter the size of cylinder by adding “&lt;strong&gt;+5000M&lt;/strong&gt;” in last cylinder. Here, ‘&lt;strong&gt;+&lt;/strong&gt;‘ means addition and &lt;strong&gt;5000M&lt;/strong&gt; means size of new partition (i.e &lt;strong&gt;5000MB&lt;/strong&gt;). Please keep in mind that after creating a new partition, you should run ‘&lt;strong&gt;w&lt;/strong&gt;‘ command to alter and save new changes to partition table and finally reboot your system to verify newly created partition.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Command (m for help): w
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;The partition table has been altered!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Calling ioctl() to re-read partition table.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;WARNING: Re-reading the partition table failed with error 16: Device or resource busy.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;The kernel still uses the old table. The new table will be used at
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;the next reboot or after you run partprobe(8) or kpartx(8)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Syncing disks.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;7-how-to-format-a-partition-in-linux&#34;&gt;7. How to Format a Partition in Linux&lt;/h2&gt;
+&lt;p&gt;After the new partition is created, don’t skip to format the newly created partition using ‘&lt;strong&gt;mkfs&lt;/strong&gt;‘ command. Type the following command in the terminal to format a partition. Here &lt;strong&gt;/dev/sda4&lt;/strong&gt; is my newly created partition.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[root@vimmart ~]# mkfs.ext4 /dev/sda4
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;8-how-to-check-size-of-a-partition-in-linux&#34;&gt;8. How to Check Size of a Partition in Linux&lt;/h2&gt;
+&lt;p&gt;After formatting new partition, check the size of that partition using flag ‘&lt;strong&gt;s&lt;/strong&gt;‘ (displays size in blocks) with fdisk command. This way you can check size of any specific device.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[root@vimmart ~]# fdisk -s /dev/sda2
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;5194304
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;9-how-to-fix-partition-table-order&#34;&gt;9. How to Fix Partition Table Order&lt;/h2&gt;
+&lt;p&gt;If you’ve deleted a logical partition and again recreated it, you might notice ‘&lt;strong&gt;partition out of order&lt;/strong&gt;‘ problem or error message like ‘&lt;strong&gt;Partition table entries are not in disk order&lt;/strong&gt;‘.&lt;/p&gt;
+&lt;p&gt;For example, when three logical partitions such as (&lt;strong&gt;sda4&lt;/strong&gt;, &lt;strong&gt;sda5&lt;/strong&gt; and &lt;strong&gt;sda6&lt;/strong&gt;) are deleted, and new partition created, you might expect the new partition name would be &lt;strong&gt;sda4&lt;/strong&gt;. But, the system would create it as &lt;strong&gt;sda5&lt;/strong&gt;. This happens because of, after the partition are deleted, &lt;strong&gt;sda7&lt;/strong&gt; partition had been moved as &lt;strong&gt;sda4&lt;/strong&gt; and free space shift to the end.&lt;/p&gt;
+&lt;p&gt;To fix such partition order problems, and assign &lt;strong&gt;sda4&lt;/strong&gt; to the newly created partition, issue the ‘&lt;strong&gt;x&lt;/strong&gt;‘ to enter an extra functionality section and then enter ‘&lt;strong&gt;f&lt;/strong&gt;‘ expert command to fix the order of partition table as shown below.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[root@vimmart ~]# fdisk  /dev/sda
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;WARNING: DOS-compatible mode is deprecated. It&amp;#39;s strongly recommended to
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;         switch off the mode (command &amp;#39;c&amp;#39;) and change display units to
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;         sectors (command &amp;#39;u&amp;#39;).
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Command (m for help): x
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Expert command (m for help): f
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Done.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Expert command (m for help): w
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;The partition table has been altered!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Calling ioctl() to re-read partition table.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;WARNING: Re-reading the partition table failed with error 16: Device or resource busy.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;The kernel still uses the old table. The new table will be used at
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;the next reboot or after you run partprobe(8) or kpartx(8)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Syncing disks.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;After, running ‘&lt;strong&gt;f&lt;/strong&gt;‘ command, don’t forget to run ‘&lt;strong&gt;w&lt;/strong&gt;‘ command to save and exit from fdisk command mode. Once it fixed partition table order, you will no longer get error messages.&lt;/p&gt;
+&lt;h2 id=&#34;10-how-to-disable-boot-flag--of-a-partition&#34;&gt;10. How to Disable Boot Flag (*) of a Partition&lt;/h2&gt;
+&lt;p&gt;By default, fdisk command shows the boot flag (i.e. ‘*‘) symbol on each partition. If you want to enable or disable boot flag on a specific partition, do the following steps.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[root@vimmart ~]# fdisk  /dev/sda
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Press ‘&lt;strong&gt;p&lt;/strong&gt;‘ command to view the current partition table, you see there is a boot flag (asterisk (&lt;strong&gt;*&lt;/strong&gt;) symbol in orange color) on &lt;strong&gt;/dev/sda1&lt;/strong&gt; disk as shown below.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[root@vimmart ~]# fdisk /dev/sda
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;WARNING: DOS-compatible mode is deprecated. It&amp;#39;s strongly recommended to
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;         switch off the mode (command &amp;#39;c&amp;#39;) and change display units to
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;         sectors (command &amp;#39;u&amp;#39;).
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Command (m for help): p
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Disk /dev/sda: 637.8 GB, 637802643456 bytes
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;255 heads, 63 sectors/track, 77541 cylinders
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Units = cylinders of 16065 * 512 = 8225280 bytes
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   Device Boot      Start         End      Blocks   Id  System
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda1   *           1          13      104391   83  Linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda2              14        2624    20972857+  83  Linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda3            2625        4582    15727635   83  Linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda4            4583       77541   586043167+   5  Extended
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda5            4583        5887    10482381   83  Linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda6            5888        7192    10482381   83  Linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda7            7193        7845     5245191   83  Linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda8            7846        8367     4192933+  82  Linux swap / Solaris
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda9            8368       77541   555640123+  8e  Linux LVM
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Next enter command ‘&lt;strong&gt;a&lt;/strong&gt;‘ to disable boot flag, then enter partition number ‘&lt;strong&gt;1&lt;/strong&gt;‘ as (i.e. &lt;strong&gt;/dev/sda1&lt;/strong&gt;) in my case. This will disable boot flag on the partition &lt;strong&gt;/dev/sda1&lt;/strong&gt;. This will remove the asterisk (&lt;strong&gt;*&lt;/strong&gt;) flag.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Command (m for help): a
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Partition number (1-9): 1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Command (m for help): p
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Disk /dev/sda: 637.8 GB, 637802643456 bytes
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;255 heads, 63 sectors/track, 77541 cylinders
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Units = cylinders of 16065 * 512 = 8225280 bytes
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   Device Boot      Start         End      Blocks   Id  System
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda1               1          13      104391   83  Linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda2              14        2624    20972857+  83  Linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda3            2625        4582    15727635   83  Linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda4            4583       77541   586043167+   5  Extended
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda5            4583        5887    10482381   83  Linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda6            5888        7192    10482381   83  Linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda7            7193        7845     5245191   83  Linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda8            7846        8367     4192933+  82  Linux swap / Solaris
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/dev/sda9            8368       77541   555640123+  8e  Linux LVM
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Command (m for help):
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I’ve tried my best to include almost all basic commands of fdisk commands, but still fdisk contains a variety of other expert commands you can use them by entering ‘&lt;strong&gt;x&lt;/strong&gt;‘. For more detailed information, check out ‘&lt;strong&gt;man fdisk&lt;/strong&gt;‘ command from the terminal. If I’ve missed any important command, please do share with me via comment section.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Laptop Power Management</title>
+      <link>https://hauptling12.github.io/vimmart/posts/laptop-power-management/</link>
+      <pubDate>Mon, 24 Oct 2022 15:03:53 +1000</pubDate>
+      
+      <guid>https://hauptling12.github.io/vimmart/posts/laptop-power-management/</guid>
+      <description>&lt;p&gt;Power management is a critical thing to understand in laptops. It&amp;rsquo;s possible to buy an expensive laptop and end up not using it because of bad power management practices.&lt;/p&gt;
+&lt;p&gt;Things that effect battery life&lt;/p&gt;
+&lt;blockquote&gt;
+- Frequency adjustment makes massive battery difference.
+- You can turn of CPU cores independently
+- Intel P-States are a bit unpredictable.
+- eGPUs will always drain a battery faster than just APU laptops.
+&lt;/blockquote&gt;
+&lt;p&gt;Also, not taking care of the thermals on a laptop will lead to less laptop life, shorter battery, and unpleasant heat generation.&lt;/p&gt;
+&lt;h2 id=&#34;cooling-pad&#34;&gt;Cooling Pad&lt;/h2&gt;
+&lt;p&gt;Get any cheap amazon cooling pad from amazon. Here is a decent $30 one with lots of reviews. &lt;a href=&#34;https://amzn.to/3SV0Y0l&#34;&gt;https://amzn.to/3SV0Y0l&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;redo-thermal-paste&#34;&gt;Redo Thermal Paste&lt;/h2&gt;
+&lt;p&gt;By default, almost any and every laptop has excessive thermal compound which leads to higher temperatures. Simply removing the excess compound and apply just a drop of &amp;ldquo;good&amp;rdquo; thermal paste will drop temps by about 10 Celsius.&lt;/p&gt;
+&lt;p&gt;Here is an example of excess factory thermal compound application:
+&lt;img src=&#34;https://hauptling12.github.io/vimmart/images/thermal.jpg&#34; alt=&#34;termal&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;adjust-max-cpu-frequency&#34;&gt;Adjust Max CPU Frequency&lt;/h2&gt;
+&lt;p&gt;Set your CPU governor to the maximum power it can use. I NEVER use a 100% of the CPU and in most instances rarely break above 50% of its total power. Typically, around 2 GHz is perfect for my day-to-day work. When working on battery, I put this down to 25% on a beefy laptop to conserve most of its power. On weaker laptops, you&amp;rsquo;d probably double these numbers. 100% on AC Power and 50% on Battery.&lt;/p&gt;
+&lt;h3 id=&#34;linux---cpupower&#34;&gt;Linux - cpupower&lt;/h3&gt;
+&lt;h4 id=&#34;required-dependencies&#34;&gt;Required Dependencies&lt;/h4&gt;
+&lt;p&gt;Install the following packages&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;cpupower&lt;/li&gt;
+&lt;li&gt;acpi-support&lt;/li&gt;
+&lt;li&gt;acpid&lt;/li&gt;
+&lt;li&gt;acpi&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Example Install:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;apt-get install acpi-support acpid acpi linux-cpupower cpufrequtils
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;setting-minmax-power-example&#34;&gt;Setting Min/Max Power Example&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cpupower frequency-set -g powersave -d 0.8G -u 1.2G
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;check-frequency&#34;&gt;Check Frequency&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cpufreq-info
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;disable-turbo&#34;&gt;Disable Turbo&lt;/h3&gt;
+&lt;p&gt;Turbo will draw more power and reduce battery life while increasing CPU temperature.&lt;/p&gt;
+&lt;p&gt;Run the following from a root user:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo 1 &amp;gt; /sys/devices/system/cpu/intel_pstate/no_turbo
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;turn-off-cpu-cores&#34;&gt;Turn off CPU Cores&lt;/h3&gt;
+&lt;p&gt;The more CPU cores that your laptop uses, the power it will draw. On higher end laptops you can see as big as a 75% savings and extend the battery life x3.&lt;/p&gt;
+&lt;p&gt;Taking a CPU core offline (&lt;em&gt;Note: you can&amp;rsquo;t offline cpu0&lt;/em&gt;)&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo 0 &amp;gt; /sys/devices/system/cpu/cpu#/online
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;To disable cores above 4 threads, run the following in a bash script:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;for ((i=4;i&amp;lt;$(nproc);i++)); do echo 0 &amp;gt; /sys/devices/system/cpu/cpu$i/online; done
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;use-cpulimit-to-constrain-apps&#34;&gt;Use CPULIMIT to Constrain Apps&lt;/h3&gt;
+&lt;h4 id=&#34;install&#34;&gt;Install&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt install cpulimit
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;adjust-exec-commands-in-desktop&#34;&gt;Adjust EXEC commands in .desktop&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cpulimit --limit 70 /usr/bin/google-chrome-bin
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;Note: This would limit CPU usage for Google Chrome to 70%&lt;/em&gt;&lt;/p&gt;
+&lt;h3 id=&#34;linux---adjust-gpu-power&#34;&gt;Linux - adjust GPU power&lt;/h3&gt;
+&lt;p&gt;There are two methods for adjusting the power usage your GPU uses. I personally use both depending on the laptop, but eGPU&amp;rsquo;s will eat up a battery laptop in no time.&lt;/p&gt;
+&lt;h4 id=&#34;manually-adjust-mhz-of-gpu&#34;&gt;Manually adjust MHz of GPU&lt;/h4&gt;
+&lt;p&gt;Set the following variables:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;/sys/class/drm/card0/gt_max_freq_mhz&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/sys/class/drm/card0/gt_boost_freq_mhz&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Using cat to display current MHz and then simply echo the new lower value to these variables.&lt;/p&gt;
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo &amp;#34;1000&amp;#34; &amp;gt; /sys/class/drm/card0/gt_max_freq_mhz
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;turning-off-gpu-with-prime-select&#34;&gt;Turning off GPU with Prime-select&lt;/h4&gt;
+&lt;p&gt;While there are technically 3 options, I recommend only using NVIDIA and intel, as on-demand doesn&amp;rsquo;t work very well.&lt;/p&gt;
+&lt;h4 id=&#34;turning-off-gpu-with-envycontrol&#34;&gt;Turning off GPU with Envycontrol&lt;/h4&gt;
+&lt;p&gt;Cool python project that rebuilds the init system to exclude nvidia.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/geminis3/EnvyControl&#34;&gt;https://github.com/geminis3/EnvyControl&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;windows---gui-power-management&#34;&gt;Windows - GUI Power Management&lt;/h3&gt;
+&lt;p&gt;Launch the GUI power panel with Start ⇾ Run &lt;code&gt;powercfg.cpl&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hauptling12.github.io/vimmart/images/win-power.png&#34; alt=&#34;win-power&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Then change the Min / Max CPU Power. I typically set these to 5% Min and 50% Max, but on weaker laptops you can set these higher.&lt;/p&gt;
+&lt;h3 id=&#34;windows---autohotkey-script&#34;&gt;Windows - AutoHotkey Script&lt;/h3&gt;
+&lt;p&gt;This script sets the max CPU state when plugged in to the wall (AC Power) and when it runs on battery (DC Power).&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;PowerWriteProcessorStateValueIndex(50, &amp;#34;AC&amp;#34;)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;PowerWriteProcessorStateValueIndex(25, &amp;#34;DC&amp;#34;)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ExitApp
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;;---------------------
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;PowerWriteProcessorStateValueIndex(Max := &amp;#34;&amp;#34;, Mode := &amp;#34;&amp;#34;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	l:=PowerEnumeratePlans(ActivePlan), VarSetCapacity(GUID_ACTIVE_POWER_SAVING, 16, 0), VarSetCapacity(GUID_PROCESSOR_SETTINGS_SUBGROUP, 16, 0)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	, DllCall(&amp;#34;Ole32.dll\CLSIDFromString&amp;#34;, &amp;#34;WStr&amp;#34;, &amp;#34;{&amp;#34; ActivePlan.GUID &amp;#34;}&amp;#34;, &amp;#34;Ptr&amp;#34;, &amp;amp;GUID_ACTIVE_POWER_SAVING), VarSetCapacity(GUID_PROCESSOR_THROTTLE_MAXIMUM, 16, 0)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	, DllCall(&amp;#34;Ole32.dll\CLSIDFromString&amp;#34;, &amp;#34;WStr&amp;#34;, &amp;#34;{54533251-82be-4824-96c1-47b60b740d00}&amp;#34;, &amp;#34;Ptr&amp;#34;, &amp;amp;GUID_PROCESSOR_SETTINGS_SUBGROUP)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	, DllCall(&amp;#34;Ole32.dll\CLSIDFromString&amp;#34;, &amp;#34;WStr&amp;#34;, &amp;#34;{BC5038F7-23E0-4960-96DA-33ABAF5935EC}&amp;#34;, &amp;#34;Ptr&amp;#34;, &amp;amp;GUID_PROCESSOR_THROTTLE_MAXIMUM)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	, DllCall(&amp;#34;PowrProf.dll\PowerWrite&amp;#34; Mode &amp;#34;ValueIndex&amp;#34;, &amp;#34;Ptr&amp;#34;, 0, &amp;#34;Ptr&amp;#34;, &amp;amp;GUID_ACTIVE_POWER_SAVING
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	, &amp;#34;Ptr&amp;#34;, &amp;amp;GUID_PROCESSOR_SETTINGS_SUBGROUP, &amp;#34;Ptr&amp;#34;, &amp;amp;GUID_PROCESSOR_THROTTLE_MAXIMUM, &amp;#34;UInt&amp;#34;, Max, &amp;#34;UInt&amp;#34;)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	for k, v in l
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		if !(v.Default) {
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;			RunWait, % ComSpec &amp;#34; /c powercfg /s &amp;#34; v.GUID,, Hide
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;			break
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		} RunWait, % ComSpec &amp;#34; /c powercfg /s &amp;#34; ActivePlan.GUID,, Hide
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;;------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;;enumerates all power plans
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;;for k, v in PowerEnumeratePlans()
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;;	MsgBox % &amp;#34;#&amp;#34; k &amp;#34;`nGUID: &amp;#34; v.GUID &amp;#34;`Name: &amp;#34; v.Name &amp;#34;`nDefault?: &amp;#34; v.Default
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;PowerEnumeratePlans(ByRef ActivePlan := &amp;#34;&amp;#34;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	List := {}
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	for k, v in StrSplit(CMD(&amp;#34;powercfg /l&amp;#34;), &amp;#34;:&amp;#34;, A_Space A_Tab)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		if (A_Index&amp;gt;1) {
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;			Info := {}, Info.GUID := SubStr(Trim(v), 1, 36), Info.Default := !!InStr(v, &amp;#34;*&amp;#34;)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;			, Info.Name := Trim(StrSplit(SubStr(v, InStr(v, &amp;#34;(&amp;#34;)+1), &amp;#34;)&amp;#34;)[1]), List.Push(Info)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;			if (Info.Default)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;				ActivePlan := Info
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		} return List
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;;executes cmd command and return the result
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;CMD(CMD := &amp;#34;&amp;#34;, Encoding := &amp;#34;UTF-8&amp;#34;, ByRef ExitCode := &amp;#34;&amp;#34;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	DllCall(&amp;#34;Kernel32.dll\CreatePipe&amp;#34;, &amp;#34;PtrP&amp;#34;, hReadPipe, &amp;#34;PtrP&amp;#34;, hWritePipe, &amp;#34;Ptr&amp;#34;, 0, &amp;#34;UInt&amp;#34;, 0)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	, DllCall(&amp;#34;Kernel32.dll\SetHandleInformation&amp;#34;, &amp;#34;Ptr&amp;#34;, hWritePipe, &amp;#34;UInt&amp;#34;, 1, &amp;#34;UInt&amp;#34;, 1)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	, Size := VarSetCapacity(STARTUPINFO, A_PtrSize=4?68:104, 0), NumPut(Size, STARTUPINFO, 0, &amp;#34;UInt&amp;#34;)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    , NumPut(0x100, STARTUPINFO, A_PtrSize=4?44:60, &amp;#34;UInt&amp;#34;), NumPut(hStdInRd, STARTUPINFO, A_PtrSize=4?56:80, &amp;#34;Ptr&amp;#34;)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    , NumPut(hWritePipe, STARTUPINFO, A_PtrSize=4?60:88, &amp;#34;Ptr&amp;#34;), NumPut(hWritePipe, STARTUPINFO, A_PtrSize=4?64:96, &amp;#34;Ptr&amp;#34;)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	, pi := CreateProcess(, ComSpec &amp;#34; /c &amp;#34; CMD,,,, 0x08000000,,, &amp;amp;STARTUPINFO)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	, DllCall(&amp;#34;Kernel32.dll\CloseHandle&amp;#34;, &amp;#34;Ptr&amp;#34;, hWritePipe), Size := VarSetCapacity(Buff, 4095)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	while DllCall(&amp;#34;Kernel32.dll\ReadFile&amp;#34;, &amp;#34;Ptr&amp;#34;, hReadPipe, &amp;#34;Ptr&amp;#34;, &amp;amp;Buff, &amp;#34;UInt&amp;#34;, Size, &amp;#34;PtrP&amp;#34;, Bytes, &amp;#34;Ptr&amp;#34;, 0)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        OutputVar .= StrGet(&amp;amp;Buff, Bytes, Encoding)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	DllCall(&amp;#34;Kernel32.dll\CloseHandle&amp;#34;, &amp;#34;Ptr&amp;#34;, pi.handle), DllCall(&amp;#34;Kernel32.dll\CloseHandle&amp;#34;, &amp;#34;Ptr&amp;#34;, hReadPipe)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	return OutputVar, DllCall(&amp;#34;Kernel32.dll\GetExitCodeProcess&amp;#34;, &amp;#34;Ptr&amp;#34;, pi.handle, &amp;#34;UIntP&amp;#34;, ExitCode)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;} CreateProcess(ApplicationName := &amp;#34;&amp;#34;, ByRef CommandLine := &amp;#34;&amp;#34;, ProcessAttributes := 0, ThreadAttributes := 0, InheritHandles := true, CreationFlags := 0x08000000, Environment := 0, CurrentDirectory := &amp;#34;&amp;#34;, StartupInfo := 0) {
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	VarSetCapacity(PROCESS_INFORMATION, A_PtrSize=4?16:24, 0)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	, r := DllCall(&amp;#34;Kernel32.dll\CreateProcess&amp;#34;, &amp;#34;Ptr&amp;#34;, ApplicationName=&amp;#34;&amp;#34;?0:&amp;amp;ApplicationName, &amp;#34;Ptr&amp;#34;, CommandLine=&amp;#34;&amp;#34;?0:&amp;amp;CommandLine
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	, &amp;#34;Ptr&amp;#34;, ProcessAttributes, &amp;#34;Ptr&amp;#34;, ThreadAttributes, &amp;#34;Int&amp;#34;, !!InheritHandles, &amp;#34;UInt&amp;#34;, CreationFlags, &amp;#34;Ptr&amp;#34;, Environment, &amp;#34;Ptr&amp;#34;, CurrentDirectory=&amp;#34;&amp;#34;?0:&amp;amp;CurrentDirectory
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	, &amp;#34;Ptr&amp;#34;, StartupInfo, &amp;#34;Ptr&amp;#34;, &amp;amp;PROCESS_INFORMATION)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	return r?{HANDLE: NumGet(PROCESS_INFORMATION, 0, &amp;#34;Ptr&amp;#34;), hThread: NumGet(PROCESS_INFORMATION, A_PtrSize, &amp;#34;Ptr&amp;#34;)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	, ID: NumGet(PROCESS_INFORMATION, A_PtrSize=4?8:16, &amp;#34;Ptr&amp;#34;), ThreadID: NumGet(PROCESS_INFORMATION, A_PtrSize=4?12:24, &amp;#34;Ptr&amp;#34;)}:0, ErrorLevel := !r
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

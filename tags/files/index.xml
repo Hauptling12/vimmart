@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Files on vimmart</title>
+    <link>https://hauptling12.github.io/vimmart/tags/files/</link>
+    <description>Recent content in Files on vimmart</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 25 Oct 2022 14:51:01 +1000</lastBuildDate><atom:link href="https://hauptling12.github.io/vimmart/tags/files/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Exploring /proc File System in Linux</title>
+      <link>https://hauptling12.github.io/vimmart/posts/exploring-proc-file-system-in-linux/</link>
+      <pubDate>Tue, 25 Oct 2022 14:51:01 +1000</pubDate>
+      
+      <guid>https://hauptling12.github.io/vimmart/posts/exploring-proc-file-system-in-linux/</guid>
+      <description>&lt;p&gt;Today, we are going to take a look inside the /proc directory and develop a familiarity with it. The /proc directory is present on all Linux systems, regardless of flavor or architecture.&lt;/p&gt;
+&lt;p&gt;One misconception that we have to immediately clear up is that the /proc directory is NOT a real File System, in the sense of the term. It is a Virtual File System. Contained within the procfs are information about processes and other system information. It is mapped to /proc and mounted at boot time.&lt;/p&gt;
+&lt;p&gt;First, lets get into the &lt;code&gt;/proc&lt;/code&gt; directory and have a look around:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cd /proc
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The first thing that you will notice is that there are some &lt;code&gt;familiar sounding files&lt;/code&gt;, and then a whole bunch of &lt;code&gt;numbered directories&lt;/code&gt;. The numbered directories &lt;code&gt;represent processes&lt;/code&gt;, better known as &lt;code&gt;PIDs&lt;/code&gt;, and within them, a command that occupies them. The files contain system information such as memory (&lt;code&gt;meminfo&lt;/code&gt;), CPU information (&lt;code&gt;cpuinfo&lt;/code&gt;), and available filesystems.&lt;/p&gt;
+&lt;p&gt;Let’s take a look at one of the files first:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# cat /proc/meminfo
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;sample-output&#34;&gt;Sample Output&lt;/h4&gt;
+&lt;p&gt;which returns something similar to this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;MemTotal:         604340 kB
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;MemFree:           54240 kB
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Buffers:           18700 kB
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Cached:           369020 kB
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;SwapCached:            0 kB
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Active:           312556 kB
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Inactive:         164856 kB
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Active(anon):      89744 kB
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Inactive(anon):      360 kB
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Active(file):     222812 kB
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Inactive(file):   164496 kB
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Unevictable:           0 kB
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Mlocked:               0 kB
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;SwapTotal:             0 kB
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;SwapFree:              0 kB
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Dirty:                 0 kB
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Writeback:             0 kB
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;AnonPages:         89724 kB
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Mapped:            18012 kB
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Shmem:               412 kB
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Slab:              50104 kB
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;SReclaimable:      40224 kB
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;As you can see, &lt;code&gt;/proc/meminfo&lt;/code&gt; contains a bunch of information about your system’s memory, including the total amount available (in &lt;code&gt;kb&lt;/code&gt;) and the amount free on the top two lines.&lt;/p&gt;
+&lt;p&gt;Running the &lt;a href=&#34;https://hauptling12.github.io/vimmart/posts/13-basic-cat-command-examples-in-linux&#34;&gt;cat command&lt;/a&gt; on any of the files in &lt;code&gt;/proc&lt;/code&gt; will output their contents. Information about any files is available in the man page by running:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# man 5 /proc/&amp;lt;filename&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I will give you quick rundown on &lt;code&gt;/proc’s&lt;/code&gt; files:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;/proc/cmdline&lt;/strong&gt; – Kernel command line information.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/proc/console&lt;/strong&gt; – Information about current consoles including tty.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/proc/devices&lt;/strong&gt; – Device drivers currently configured for the running kernel.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/proc/dma&lt;/strong&gt; – Info about current DMA channels.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/proc/fb&lt;/strong&gt; – Framebuffer devices.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/proc/filesystem&lt;/strong&gt;s – Current filesystems supported by the kernel.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/proc/iomem&lt;/strong&gt; – Current system memory map for devices.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/proc/ioports&lt;/strong&gt; – Registered port regions for input output communication with device.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/proc/loadavg&lt;/strong&gt; – System load average.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/proc/locks&lt;/strong&gt; – Files currently locked by kernel.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/proc/meminfo&lt;/strong&gt; – Info about system memory (see above example).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/proc/misc&lt;/strong&gt; – Miscellaneous drivers registered for miscellaneous major device.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/proc/modules&lt;/strong&gt; – Currently loaded kernel modules.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/proc/mounts&lt;/strong&gt; – List of all mounts in use by system.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/proc/partitions&lt;/strong&gt; – Detailed info about partitions available to the system.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/proc/pci&lt;/strong&gt; – Information about every PCI device.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/proc/stat&lt;/strong&gt; – Record or various statistics kept from last reboot.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/proc/swap&lt;/strong&gt; – Information about swap space.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/proc/uptime&lt;/strong&gt; – Uptime information (in seconds).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/proc/version&lt;/strong&gt; – Kernel version, gcc version, and Linux distribution installed.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Within &lt;strong&gt;/proc’s&lt;/strong&gt; numbered directories you will find a few &lt;strong&gt;files&lt;/strong&gt; and &lt;strong&gt;links&lt;/strong&gt;. Remember that these directories’ numbers correlate to the &lt;strong&gt;PID&lt;/strong&gt; of the command being run within them. Let’s use an example. On my system, there is a folder name &lt;strong&gt;/proc/12&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# cd /proc/12
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# ls
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;sample-output-1&#34;&gt;Sample Output&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;attr        coredump_filter  io         mounts      oom_score_adj  smaps    wchan
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;autogroup   cpuset           latency    mountstats  pagemap        stack
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;auxv        cwd              limits     net         personality    stat
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cgroup      environ          loginuid   ns          root           statm
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;clear_refs  exe              maps       numa_maps   sched          status
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cmdline     fd               mem        oom_adj     schedstat      syscall
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;comm        fdinfo           mountinfo  oom_score   sessionid      task
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If I run:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# cat /proc/12/status
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I get the following:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Name:	xenwatch
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;State:	S (sleeping)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Tgid:	12
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Pid:	12
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;PPid:	2
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;TracerPid:	0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Uid:	0	0	0	0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Gid:	0	0	0	0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;FDSize:	64
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Groups:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Threads:	1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;SigQ:	1/4592
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;SigPnd:	0000000000000000
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ShdPnd:	0000000000000000
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;SigBlk:	0000000000000000
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;SigIgn:	ffffffffffffffff
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;SigCgt:	0000000000000000
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;CapInh:	0000000000000000
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;CapPrm:	ffffffffffffffff
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;CapEff:	ffffffffffffffff
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;CapBnd:	ffffffffffffffff
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Cpus_allowed:	1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Cpus_allowed_list:	0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Mems_allowed:	00000000,00000001
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Mems_allowed_list:	0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;voluntary_ctxt_switches:	84
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;nonvoluntary_ctxt_switches:	0
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;So, what does this mean? Well, the important part is at the top. We can see from the status file that this process belongs to &lt;strong&gt;xenwatch&lt;/strong&gt;. Its current state is &lt;strong&gt;sleeping&lt;/strong&gt;, and its process&lt;strong&gt; ID&lt;/strong&gt; is &lt;strong&gt;12&lt;/strong&gt;, obviously. We also can see who is running this, as &lt;strong&gt;UID&lt;/strong&gt; and &lt;strong&gt;GID&lt;/strong&gt; are &lt;strong&gt;0&lt;/strong&gt;, indicating that this process belongs to the &lt;strong&gt;root&lt;/strong&gt; user.&lt;/p&gt;
+&lt;p&gt;In any numbered directory, you will have a similar file structure. The most important ones, and their descriptions, are as follows:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;cmdline&lt;/strong&gt; – command line of the process&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;environ&lt;/strong&gt; – environmental variables&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;fd&lt;/strong&gt; – file descriptors&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;limits&lt;/strong&gt; – contains information about the limits of the process&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;mounts&lt;/strong&gt; – related information&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;You will also notice a number of links in the numbered directory:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;cwd&lt;/strong&gt; – a link to the current working directory of the process&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;exe&lt;/strong&gt; – link to the executable of the process&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;root&lt;/strong&gt; – link to the work directory of the process&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Explanation of Everything Is a File and Types of Files in Linux</title>
+      <link>https://hauptling12.github.io/vimmart/posts/explanation-of-everything-is-a-file-and-types-of-files-in-linux/</link>
+      <pubDate>Tue, 25 Oct 2022 12:03:44 +1000</pubDate>
+      
+      <guid>https://hauptling12.github.io/vimmart/posts/explanation-of-everything-is-a-file-and-types-of-files-in-linux/</guid>
+      <description>&lt;p&gt;If you are new to Linux, or have used it for a few months, then you must have heard or read statements such as “&lt;code&gt;In Linux, everything is a File&lt;/code&gt;”.&lt;/p&gt;
+&lt;p&gt;That is in fact true although it is just a generalization concept, in Unix and its derivatives such as Linux, everything is considered as a file. If something is not a file, then it must be running as a process on the system.&lt;/p&gt;
+&lt;p&gt;To understand this, take for example the amount of space on your root &lt;code&gt;/&lt;/code&gt; directory is always consumed by different types of Linux files. When you create a file or transfer a file to your system, it occupies some space on the physical disk and it is considered to be in a specific format (file type).&lt;/p&gt;
+&lt;p&gt;And also the Linux system does not differentiate between files and directories, but directories do one important job, that is store other files in groups in a hierarchy for easy location. All your hardware components are represented as files and the system communicates with them using these files.&lt;/p&gt;
+&lt;p&gt;The idea is an important description of a great property of Linux, where input/output resources such as your documents, directories (folders in Mac OS X and Windows), keyboard, monitor, hard-drives, removable media, printers, modems, virtual terminals and also inter-process and network communication are streams of bytes defined by file system space.&lt;/p&gt;
+&lt;p&gt;A notable advantage of everything being a file is that the same set of Linux tools, utilities and APIs can be used on the above input/output resources.&lt;/p&gt;
+&lt;p&gt;Although everything in Linux is a file, there are certain special files that are more than just a file for example sockets and named pipes.&lt;/p&gt;
+&lt;h2 id=&#34;what-are-the-different-types-of-files-in-linux&#34;&gt;What are the different types of files in Linux?&lt;/h2&gt;
+&lt;p&gt;In Linux there are basically three types of files:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Ordinary/Regular files&lt;/li&gt;
+&lt;li&gt;Special files&lt;/li&gt;
+&lt;li&gt;Directories&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;ordinaryregular-files&#34;&gt;Ordinary/Regular Files&lt;/h3&gt;
+&lt;p&gt;These are files data contain text, data or program instructions and they are the most common type of files you can expect to find on a Linux system and they include:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Readable files&lt;/li&gt;
+&lt;li&gt;Binary files&lt;/li&gt;
+&lt;li&gt;Image files&lt;/li&gt;
+&lt;li&gt;Compressed files and so on.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;special-files&#34;&gt;Special Files&lt;/h3&gt;
+&lt;p&gt;Special files include the following:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Block files&lt;/code&gt; : These are device files that provide buffered access to system hardware components. They provide a method of communication with device drivers through the file system.&lt;/p&gt;
+&lt;p&gt;One important aspect about &lt;code&gt;block&lt;/code&gt; files is that they can transfer a large block of data and information at a given time.&lt;/p&gt;
+&lt;p&gt;Listing block files sockets in a directory:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# ls -l /dev | grep &amp;#34;^b&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;sample-output&#34;&gt;Sample Output&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;brw-rw----  1 root disk        7,   0 May 18 10:26 loop0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;brw-rw----  1 root disk        7,   1 May 18 10:26 loop1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;brw-rw----  1 root disk        7,   2 May 18 10:26 loop2
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;brw-rw----  1 root disk        7,   3 May 18 10:26 loop3
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;brw-rw----  1 root disk        7,   4 May 18 10:26 loop4
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;brw-rw----  1 root disk        7,   5 May 18 10:26 loop5
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;brw-rw----  1 root disk        7,   6 May 18 10:26 loop6
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;brw-rw----  1 root disk        7,   7 May 18 10:26 loop7
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;brw-rw----  1 root disk        1,   0 May 18 10:26 ram0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;brw-rw----  1 root disk        1,   1 May 18 10:26 ram1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;brw-rw----  1 root disk        1,  10 May 18 10:26 ram10
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;brw-rw----  1 root disk        1,  11 May 18 10:26 ram11
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;brw-rw----  1 root disk        1,  12 May 18 10:26 ram12
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;brw-rw----  1 root disk        1,  13 May 18 10:26 ram13
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;brw-rw----  1 root disk        1,  14 May 18 10:26 ram14
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;brw-rw----  1 root disk        1,  15 May 18 10:26 ram15
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;brw-rw----  1 root disk        1,   2 May 18 10:26 ram2
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;brw-rw----  1 root disk        1,   3 May 18 10:26 ram3
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;brw-rw----  1 root disk        1,   4 May 18 10:26 ram4
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;brw-rw----  1 root disk        1,   5 May 18 10:26 ram5
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Character files&lt;/strong&gt; : These are also device files that provide unbuffered serial access to system hardware components. They work by providing a way of communication with devices by transferring data one character at a time.&lt;/p&gt;
+&lt;p&gt;Listing character files sockets in a directory:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# ls -l /dev | grep &amp;#34;^c&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;sample-output-1&#34;&gt;Sample Output&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;crw-------  1 root root       10, 235 May 18 15:54 autofs
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;crw-------  1 root root       10, 234 May 18 15:54 btrfs-control
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;crw-------  1 root root        5,   1 May 18 10:26 console
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;crw-------  1 root root       10,  60 May 18 10:26 cpu_dma_latency
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;crw-------  1 root root       10, 203 May 18 15:54 cuse
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;crw-------  1 root root       10,  61 May 18 10:26 ecryptfs
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;crw-rw----  1 root video      29,   0 May 18 10:26 fb0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;crw-rw-rw-  1 root root        1,   7 May 18 10:26 full
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;crw-rw-rw-  1 root root       10, 229 May 18 10:26 fuse
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;crw-------  1 root root      251,   0 May 18 10:27 hidraw0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;crw-------  1 root root       10, 228 May 18 10:26 hpet
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;crw-r--r--  1 root root        1,  11 May 18 10:26 kmsg
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;crw-rw----+ 1 root root       10, 232 May 18 10:26 kvm
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;crw-------  1 root root       10, 237 May 18 10:26 loop-control
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;crw-------  1 root root       10, 227 May 18 10:26 mcelog
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;crw-------  1 root root      249,   0 May 18 10:27 media0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;crw-------  1 root root      250,   0 May 18 10:26 mei0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;crw-r-----  1 root kmem        1,   1 May 18 10:26 mem
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;crw-------  1 root root       10,  57 May 18 10:26 memory_bandwidth
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;crw-------  1 root root       10,  59 May 18 10:26 network_latency
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;crw-------  1 root root       10,  58 May 18 10:26 network_throughput
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;crw-rw-rw-  1 root root        1,   3 May 18 10:26 null
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;crw-r-----  1 root kmem        1,   4 May 18 10:26 port
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;crw-------  1 root root      108,   0 May 18 10:26 ppp
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;crw-------  1 root root       10,   1 May 18 10:26 psaux
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;crw-rw-rw-  1 root tty         5,   2 May 18 17:40 ptmx
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;crw-rw-rw-  1 root root        1,   8 May 18 10:26 random
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Symbolic link files&lt;/strong&gt; : A symbolic link is a reference to another file on the system. Therefore, symbolic link files are files that point to other files, and they can either be directories or regular files.&lt;/p&gt;
+&lt;p&gt;Listing symbolic link sockets in a directory:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# ls -l /dev/ | grep &amp;#34;^l&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;sample-output-2&#34;&gt;Sample Output&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;lrwxrwxrwx  1 root root             3 May 18 10:26 cdrom -&amp;gt; sr0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;lrwxrwxrwx  1 root root            11 May 18 15:54 core -&amp;gt; /proc/kcore
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;lrwxrwxrwx  1 root root            13 May 18 15:54 fd -&amp;gt; /proc/self/fd
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;lrwxrwxrwx  1 root root             4 May 18 10:26 rtc -&amp;gt; rtc0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;lrwxrwxrwx  1 root root             8 May 18 10:26 shm -&amp;gt; /run/shm
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;lrwxrwxrwx  1 root root            15 May 18 15:54 stderr -&amp;gt; /proc/self/fd/2
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;lrwxrwxrwx  1 root root            15 May 18 15:54 stdin -&amp;gt; /proc/self/fd/0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;lrwxrwxrwx  1 root root            15 May 18 15:54 stdout -&amp;gt; /proc/self/fd/1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You can make symbolic links using the &lt;code&gt;ln&lt;/code&gt; utility in Linux as in the example below.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# touch file1.txt
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# ln -s file1.txt /home/hauptling/file1.txt  [create symbolic link]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# ls -l /home/hauptling/ | grep &amp;#34;^l&amp;#34;         [List symbolic links]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In the above example, I created a file called &lt;code&gt;file1.txt&lt;/code&gt; in &lt;strong&gt;/tmp&lt;/strong&gt; directory, then created the symbolic link, &lt;strong&gt;/home/hauptling/file1.txt&lt;/strong&gt; to point to &lt;strong&gt;/tmp/file1.txt&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Pipes or Named pipes&lt;/strong&gt; : These are files that allow inter-process communication by connecting the output of one process to the input of another.&lt;/p&gt;
+&lt;p&gt;A named pipe is actually a file that is used by two process to communicate with each and it acts as a Linux pipe.&lt;/p&gt;
+&lt;p&gt;Listing pipes sockets in a directory:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# ls -l | grep &amp;#34;^p&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;sample-output-3&#34;&gt;Sample Output&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;prw-rw-r-- 1 hauptling hauptling    0 May 18 17:47 pipe1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;prw-rw-r-- 1 hauptling hauptling    0 May 18 17:47 pipe2
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;prw-rw-r-- 1 hauptling hauptling    0 May 18 17:47 pipe3
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;prw-rw-r-- 1 hauptling hauptling    0 May 18 17:47 pipe4
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;prw-rw-r-- 1 hauptling hauptling    0 May 18 17:47 pipe5
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You can use the &lt;strong&gt;mkfifo&lt;/strong&gt; utility to create a named pipe in Linux as follows.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# mkfifo pipe1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# echo &amp;#34;This is named pipe1&amp;#34; &amp;gt; pipe1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In the above example, I created a named pipe called &lt;code&gt;pipe1&lt;/code&gt;, then I passed some data to it using the echo command, after that the shell became un-interactive while processing the input.&lt;/p&gt;
+&lt;p&gt;Then I opened another shell and run the another command to print out what was passed to pipe.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# while read line ;do echo &amp;#34;This was passed-&amp;#39;$line&amp;#39; &amp;#34;; done&amp;lt;pipe1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;Socket files&lt;/code&gt; : These are files that provide a means of inter-process communication, but they can transfer data and information between process running on different environments.&lt;/p&gt;
+&lt;p&gt;This means that sockets provide data and information transfer between process running on different machines on a network.&lt;/p&gt;
+&lt;p&gt;An example to show the work of sockets would be a web browser making a connection to a web server.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# ls -l /dev/ | grep &amp;#34;^s&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;sample-output-4&#34;&gt;Sample Output&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;srw-rw-rw-  1 root root             0 May 18 10:26 log
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This is an example of a socket create in &lt;strong&gt;C&lt;/strong&gt; by using the &lt;code&gt;socket()&lt;/code&gt; system call.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;int socket_desc= socket(AF_INET, SOCK_STREAM, 0 );
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In the above:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;AF_INET&lt;/code&gt; is the address family(IPv4)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SOCK_STREAM&lt;/code&gt; is the type (connection is TCP protocol oriented)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;0&lt;/code&gt; is the protocol(IP Protocol)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;To refer to the socket file, use the &lt;code&gt;socket_desc&lt;/code&gt;, which is the same as the file descriptor, and use &lt;code&gt;read()&lt;/code&gt; and &lt;code&gt;write()&lt;/code&gt; system calls to read and write from the socket respectively.&lt;/p&gt;
+&lt;h3 id=&#34;directories&#34;&gt;Directories&lt;/h3&gt;
+&lt;p&gt;These are special files that store both ordinary and other special files and they are organized on the Linux file system in a hierarchy starting from the root &lt;code&gt;(/)&lt;/code&gt; directory.&lt;/p&gt;
+&lt;p&gt;Listing sockets in a directory:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# ls -l / | grep &amp;#34;^d&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;sample-output-5&#34;&gt;Sample Output&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;drwxr-xr-x   2 root root  4096 May  5 15:49 bin
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;drwxr-xr-x   4 root root  4096 May  5 15:58 boot
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;drwxr-xr-x   2 root root  4096 Apr 11  2015 cdrom
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;drwxr-xr-x  17 root root  4400 May 18 10:27 dev
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;drwxr-xr-x 168 root root 12288 May 18 10:28 etc
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;drwxr-xr-x   3 root root  4096 Apr 11  2015 home
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;drwxr-xr-x  25 root root  4096 May  5 15:44 lib
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;drwxr-xr-x   2 root root  4096 May  5 15:44 lib64
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;drwx------   2 root root 16384 Apr 11  2015 lost+found
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;drwxr-xr-x   3 root root  4096 Apr 10  2015 media
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;drwxr-xr-x   3 root root  4096 Feb 23 17:54 mnt
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;drwxr-xr-x  16 root root  4096 Apr 30 16:01 opt
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;dr-xr-xr-x 223 root root     0 May 18 15:54 proc
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;drwx------  19 root root  4096 Apr  9 11:12 root
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;drwxr-xr-x  27 root root   920 May 18 10:54 run
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;drwxr-xr-x   2 root root 12288 May  5 15:57 sbin
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;drwxr-xr-x   2 root root  4096 Dec  1  2014 srv
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;dr-xr-xr-x  13 root root     0 May 18 15:54 sys
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;drwxrwxrwt  13 root root  4096 May 18 17:55 tmp
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;drwxr-xr-x  11 root root  4096 Mar 31 16:00 usr
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;drwxr-xr-x  12 root root  4096 Nov 12  2015 var
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You can make a directory using the &lt;code&gt;mkdir&lt;/code&gt; command.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# mkdir -m 1666 vimmart.com
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# mkdir -m 1666 stackoverflow.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
+&lt;p&gt;You should now be having a clear understanding of why everything in Linux is a file and the different types of files that can exit on your Linux system.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

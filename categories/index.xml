@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on vimmart</title>
+    <link>https://hauptling12.github.io/vimmart/categories/</link>
+    <description>Recent content in Categories on vimmart</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 25 Oct 2022 15:21:12 +1000</lastBuildDate><atom:link href="https://hauptling12.github.io/vimmart/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux</title>
+      <link>https://hauptling12.github.io/vimmart/categories/linux/</link>
+      <pubDate>Tue, 25 Oct 2022 15:21:12 +1000</pubDate>
+      
+      <guid>https://hauptling12.github.io/vimmart/categories/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Networking</title>
+      <link>https://hauptling12.github.io/vimmart/categories/networking/</link>
+      <pubDate>Tue, 25 Oct 2022 14:38:28 +1000</pubDate>
+      
+      <guid>https://hauptling12.github.io/vimmart/categories/networking/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Programming</title>
+      <link>https://hauptling12.github.io/vimmart/categories/programming/</link>
+      <pubDate>Tue, 25 Oct 2022 13:03:14 +1000</pubDate>
+      
+      <guid>https://hauptling12.github.io/vimmart/categories/programming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Windows</title>
+      <link>https://hauptling12.github.io/vimmart/categories/windows/</link>
+      <pubDate>Tue, 25 Oct 2022 11:38:12 +1000</pubDate>
+      
+      <guid>https://hauptling12.github.io/vimmart/categories/windows/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Android</title>
+      <link>https://hauptling12.github.io/vimmart/categories/android/</link>
+      <pubDate>Mon, 24 Oct 2022 15:16:33 +1000</pubDate>
+      
+      <guid>https://hauptling12.github.io/vimmart/categories/android/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

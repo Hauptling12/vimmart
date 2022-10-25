@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Networking on vimmart</title>
+    <link>https://hauptling12.github.io/vimmart/categories/networking/</link>
+    <description>Recent content in Networking on vimmart</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 25 Oct 2022 14:38:28 +1000</lastBuildDate><atom:link href="https://hauptling12.github.io/vimmart/categories/networking/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>15 Useful “ifconfig” Commands to Configure Network Interface in Linux</title>
+      <link>https://hauptling12.github.io/vimmart/posts/ifconfig-command-examples/</link>
+      <pubDate>Tue, 25 Oct 2022 14:38:28 +1000</pubDate>
+      
+      <guid>https://hauptling12.github.io/vimmart/posts/ifconfig-command-examples/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;ifconfig&lt;/strong&gt; in short “&lt;strong&gt;interface configuration&lt;/strong&gt;” utility for system/network administration in &lt;strong&gt;Unix/Linux&lt;/strong&gt; operating systems to configure, manage and query network interface parameters via command-line interface or in a system configuration scripts.&lt;/p&gt;
+&lt;p&gt;This article covers “15 Useful “ifconfig” Commands” with their practical examples, which might be very helpful to you in managing and configuring network interfaces in Linux systems.&lt;/p&gt;
+&lt;p&gt;&lt;strong style=&#34;color: red; --darkreader-inline-color: #ff1a1a;&#34; data-darkreader-inline-color=&#34;&#34;&gt;Update&lt;/strong&gt;: The networking command &lt;strong&gt;ifconfig&lt;/strong&gt; is deprecated and replaced by the ip command in most Linux distributions.&lt;/p&gt;
+&lt;h2 id=&#34;1-view-all-network-interface-settings&#34;&gt;1. View All Network Interface Settings&lt;/h2&gt;
+&lt;p&gt;The “ifconfig” command with no arguments will display all the active interfaces details. The ifconfig command is also used to check the assigned IP address of a server.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[root@hauptling ~]# ifconfig
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;eth0      Link encap:Ethernet  HWaddr 00:0B:CD:1C:18:5A
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          inet addr:172.16.25.126  Bcast:172.16.25.63  Mask:255.255.255.224
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          inet6 addr: fe80::20b:cdff:fe1c:185a/64 Scope:Link
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          RX packets:2341604 errors:0 dropped:0 overruns:0 frame:0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          TX packets:2217673 errors:0 dropped:0 overruns:0 carrier:0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          collisions:0 txqueuelen:1000
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          RX bytes:293460932 (279.8 MiB)  TX bytes:1042006549 (993.7 MiB)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          Interrupt:185 Memory:f7fe0000-f7ff0000
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;lo        Link encap:Local Loopback
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          inet addr:127.0.0.1  Mask:255.0.0.0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          inet6 addr: ::1/128 Scope:Host
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          UP LOOPBACK RUNNING  MTU:16436  Metric:1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          RX packets:5019066 errors:0 dropped:0 overruns:0 frame:0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          TX packets:5019066 errors:0 dropped:0 overruns:0 carrier:0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          collisions:0 txqueuelen:0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          RX bytes:2174522634 (2.0 GiB)  TX bytes:2174522634 (2.0 GiB)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;tun0      Link encap:UNSPEC  HWaddr 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          inet addr:10.1.1.1  P-t-P:10.1.1.2  Mask:255.255.255.255
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          UP POINTOPOINT RUNNING NOARP MULTICAST  MTU:1500  Metric:1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          collisions:0 txqueuelen:100
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          RX bytes:0 (0.0 b)  TX bytes:0 (0.0 b)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;2-display-information-of-all-network-interfaces&#34;&gt;2. Display Information of All Network Interfaces&lt;/h2&gt;
+&lt;p&gt;The following ifconfig command with the -a argument will display information of all active or inactive network interfaces on the server. It displays the results for eth0, lo, sit0 and tun0.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[root@hauptling ~]# ifconfig -a
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;eth0      Link encap:Ethernet  HWaddr 00:0B:CD:1C:18:5A
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          inet addr:172.16.25.126  Bcast:172.16.25.63  Mask:255.255.255.224
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          inet6 addr: fe80::20b:cdff:fe1c:185a/64 Scope:Link
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          RX packets:2344927 errors:0 dropped:0 overruns:0 frame:0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          TX packets:2220777 errors:0 dropped:0 overruns:0 carrier:0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          collisions:0 txqueuelen:1000
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          RX bytes:293839516 (280.2 MiB)  TX bytes:1043722206 (995.3 MiB)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          Interrupt:185 Memory:f7fe0000-f7ff0000
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;lo        Link encap:Local Loopback
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          inet addr:127.0.0.1  Mask:255.0.0.0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          inet6 addr: ::1/128 Scope:Host
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          UP LOOPBACK RUNNING  MTU:16436  Metric:1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          RX packets:5022927 errors:0 dropped:0 overruns:0 frame:0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          TX packets:5022927 errors:0 dropped:0 overruns:0 carrier:0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          collisions:0 txqueuelen:0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          RX bytes:2175739488 (2.0 GiB)  TX bytes:2175739488 (2.0 GiB)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sit0      Link encap:IPv6-in-IPv4
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          NOARP  MTU:1480  Metric:1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          collisions:0 txqueuelen:0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          RX bytes:0 (0.0 b)  TX bytes:0 (0.0 b)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;tun0      Link encap:UNSPEC  HWaddr 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          inet addr:10.1.1.1  P-t-P:10.1.1.2  Mask:255.255.255.255
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          UP POINTOPOINT RUNNING NOARP MULTICAST  MTU:1500  Metric:1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          collisions:0 txqueuelen:100
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          RX bytes:0 (0.0 b)  TX bytes:0 (0.0 b)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;3-view-network-settings-of-specific-interface&#34;&gt;3. View Network Settings of Specific Interface&lt;/h2&gt;
+&lt;p&gt;Using interface name (eth0) as an argument with the “ifconfig” command will display details of the specific network interface.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[root@hauptling ~]# ifconfig eth0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;eth0      Link encap:Ethernet  HWaddr 00:0B:CD:1C:18:5A
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          inet addr:172.16.25.126  Bcast:172.16.25.63  Mask:255.255.255.224
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          inet6 addr: fe80::20b:cdff:fe1c:185a/64 Scope:Link
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          RX packets:2345583 errors:0 dropped:0 overruns:0 frame:0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          TX packets:2221421 errors:0 dropped:0 overruns:0 carrier:0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          collisions:0 txqueuelen:1000
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          RX bytes:293912265 (280.2 MiB)  TX bytes:1044100408 (995.7 MiB)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          Interrupt:185 Memory:f7fe0000-f7ff0000
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The “up” or “ifup” flag with interface name (eth0) activates a network interface if it is not inactive state and allowing to send and receive information. For example, “ifconfig eth0 up” or “ifup eth0” will activate the eth0 interface.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[root@hauptling ~]# ifconfig eth0 up
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;OR
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[root@hauptling ~]# ifup eth0
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;5-how-to-disable-a-network-interface&#34;&gt;5. How to Disable a Network Interface&lt;/h2&gt;
+&lt;p&gt;The “down” or “ifdown” flag with interface name (eth0) deactivates the specified network interface. For example, the “ifconfig eth0 down” or “ifdown eth0” command deactivates the eth0 interface if it is in an inactive state.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[root@hauptling ~]# ifconfig eth0 down
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;OR
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[root@hauptling ~]# ifdown eth0
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;6-how-to-assign-an-ip-address-to-network-interface&#34;&gt;6. How to Assign an IP Address to Network Interface&lt;/h2&gt;
+&lt;p&gt;To assign an IP address to a specific interface, use the following command with an interface name (&lt;strong&gt;eth0&lt;/strong&gt;) and ip address that you want to set. For example, “&lt;strong&gt;ifconfig eth0 172.16.25.125&lt;/strong&gt;” will set the IP address to interface &lt;strong&gt;eth0&lt;/strong&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[root@hauptling ~]# ifconfig eth0 172.16.25.125
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;7-how-to-assign-a-netmask-to-network-interface&#34;&gt;7. How to Assign a Netmask to Network Interface&lt;/h2&gt;
+&lt;p&gt;Using the “ifconfig” command with the “netmask” argument and interface name as (eth0) allows you to define a netmask to a given interface. For example, “ifconfig eth0 netmask 255.255.255.224” will set the network mask to a given interface eth0.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[root@hauptling ~]# ifconfig eth0 netmask 255.255.255.224
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;8-how-to-assign-a-broadcast-to-network-interface&#34;&gt;8. How to Assign a Broadcast to Network Interface&lt;/h2&gt;
+&lt;p&gt;Using the “broadcast” argument with an interface name will set the broadcast address for the given interface. For example, the “ifconfig eth0 broadcast 172.16.25.63” command sets the broadcast address to an interface eth0.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[root@hauptling ~]# ifconfig eth0 broadcast 172.16.25.63
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;9-how-to-assign-an-ip-netmask-and-broadcast-to-network-interface&#34;&gt;9. How to Assign an IP, Netmask, and Broadcast to Network Interface&lt;/h2&gt;
+&lt;p&gt;To assign an IP address, Netmask address, and Broadcast address all at once using the “ifconfig” command with all arguments as given below.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[root@hauptling ~]# ifconfig eth0 172.16.25.125 netmask 255.255.255.224 broadcast 172.16.25.63
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;10-how-to-change-mtu-for-a-network-interface&#34;&gt;10. How to Change MTU for a Network Interface&lt;/h2&gt;
+&lt;p&gt;The “mtu” argument sets the maximum transmission unit to an interface. The MTU allows you to set the limit size of packets that are transmitted on an interface. The MTU is able to handle a maximum number of octets to an interface in one single transaction.&lt;/p&gt;
+&lt;p&gt;For example, “ifconfig eth0 mtu 1000” will set the maximum transmission unit to a given set (i.e. 1000). Not all network interfaces support MTU settings.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[root@hauptling ~]# ifconfig eth0 mtu 1000
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;11-how-to-enable-promiscuous-mode&#34;&gt;11. How to Enable Promiscuous Mode&lt;/h2&gt;
+&lt;p&gt;What happens in normal mode, when a packet is received by a network card, it verifies that it belongs to itself. If not, it drops the packet normally, but in the promiscuous mode is used to accept all the packets that flow through the network card.&lt;/p&gt;
+&lt;p&gt;Today’s network tools use the promiscuous mode to capture and analyze the packets that flow through the network interface. To set the promiscuous mode, use the following command.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[root@hauptling ~]# ifconfig eth0 promisc
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;12-how-to-disable-promiscuous-mode&#34;&gt;12. How to Disable Promiscuous Mode&lt;/h2&gt;
+&lt;p&gt;To disable promiscuous mode, use the “-promisc” switch that drops back the network interface in normal mode.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[root@hauptling ~]# ifconfig eth0 -promisc
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;13-how-to-add-new-alias-to-network-interface&#34;&gt;13. How to Add New Alias to Network Interface&lt;/h2&gt;
+&lt;p&gt;The ifconfig utility allows you to configure additional network interfaces using the alias feature. To add the alias network interface of eth0, use the following command. Please note that the alias network address is in the same subnet mask. For example, if your eth0 network ip address is 172.16.25.125, then the alias ip address must be 172.16.25.127.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[root@hauptling ~]# ifconfig eth0:0 172.16.25.127
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Next, verify the newly created alias network interface address, by using the “ifconfig eth0:0” command.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[root@hauptling ~]# ifconfig eth0:0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;eth0:0    Link encap:Ethernet  HWaddr 00:01:6C:99:14:68
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          inet addr:172.16.25.123  Bcast:172.16.25.63  Mask:255.255.255.240
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          Interrupt:17
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;14-how-to-remove-alias-to-network-interface&#34;&gt;14. How to Remove Alias to Network Interface&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[root@hauptling ~]# ifconfig eth0:0 down
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;15-how-to-change-the-mac-address-of-network-interface&#34;&gt;15. How to Change the MAC address of Network Interface&lt;/h2&gt;
+&lt;p&gt;To change the MAC (Media Access Control) address of an eth0 network interface, use the following command with the argument “hw ether“. For example, see below.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[root@hauptling ~]# ifconfig eth0 hw ether AA:BB:CC:DD:EE:FF
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
